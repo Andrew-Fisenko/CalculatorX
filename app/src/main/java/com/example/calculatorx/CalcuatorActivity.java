@@ -14,16 +14,24 @@ import java.util.Map;
 
 public class CalcuatorActivity extends AppCompatActivity {
 
-    private TextView txtResult;
-    private TextView txtNumberOne;
-    private TextView txtNumberTwo;
-    private TextView txtOperation;
+    public TextView txtResult;
+    public TextView txtNumberOne;
+    public TextView txtNumberTwo;
+    public TextView txtOperation;
 
-    private static final int base = 10;
-    private Double numOne = 0.0;
-    private Double numTwo = 0.0;
-    private String oper = null;
-    private Double result = 0.0;
+    private CalculatorPresenter presenter;
+    private CalcuatorActivity calculatorView;
+
+    public CalcuatorActivity() {
+        this.calculatorView = calculatorView;
+    }
+
+    public CalcuatorActivity(TextView txtResult, TextView txtNumberOne, TextView txtNumberTwo, TextView txtOperation) {
+        this.txtResult = txtResult;
+        this.txtNumberOne = txtNumberOne;
+        this.txtNumberTwo = txtNumberTwo;
+        this.txtOperation = txtOperation;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,14 @@ public class CalcuatorActivity extends AppCompatActivity {
         txtNumberOne = findViewById(R.id.number_one);
         txtNumberTwo = findViewById(R.id.number_two);
         txtOperation = findViewById(R.id.operation);
+
+        calculatorView = new CalcuatorActivity(txtResult, txtNumberOne, txtNumberTwo, txtOperation) {
+        };
+
+
+
+
+        presenter = new CalculatorPresenter();
 
         Map<Integer, Integer> numbers = new HashMap<>();
         numbers.put(R.id.but_0, 0);
@@ -50,7 +66,14 @@ public class CalcuatorActivity extends AppCompatActivity {
         View.OnClickListener numbersClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onNumberPressed(numbers.get(v.getId()), oper, result);
+                double x = presenter.onNumberPressed(numbers.get(v.getId()),  presenter.getOper(),
+                        presenter.getResult(), calculatorView);
+                if ( x == presenter.getNumOne()){
+                    showNumOne(x);
+                } else {
+                    showNumTwo(x);
+                }
+
             }
         };
 
@@ -74,7 +97,7 @@ public class CalcuatorActivity extends AppCompatActivity {
         View.OnClickListener operationClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onOperationPressed(operations.get(v.getId()));
+                presenter.onOperationPressed(operations.get(v.getId()), calculatorView);
             }
         };
 
@@ -87,7 +110,7 @@ public class CalcuatorActivity extends AppCompatActivity {
         butEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showResult(doOperation(numOne, numTwo, oper));
+                showResult(presenter.doOperation(presenter.getNumOne(), presenter.getNumTwo(), presenter.getOper()));
             }
         });
 
@@ -95,71 +118,11 @@ public class CalcuatorActivity extends AppCompatActivity {
         butC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doResrart();
+                presenter.doResrart(calculatorView);
             }
         });
     }
 
-    private void doResrart() {
-        numOne = 0.0;
-        numTwo = 0.0;
-        result = 0.0;
-        txtNumberOne.setText(numOne.toString());
-        txtNumberTwo.setText(numTwo.toString());
-        txtResult.setText(result.toString());
-        txtOperation.setText(null);
-        oper = null;
-    }
-
-    private double doOperation(Double numOne, Double numTwo, String oper) {
-        if (numOne == 0 || numTwo == 0 || oper == null) {
-            return 0.0;
-        } else if (result != 0.0) {
-            if (oper == "/") {
-                return result = result / numTwo;
-            } else if (oper == "*") {
-                return result = result * numTwo;
-            } else if (oper == "-") {
-                return result = result - numTwo;
-            } else if (oper == "+") {
-                return result = result + numTwo;
-            }
-        } else if (oper == "/") {
-            return result = numOne / numTwo;
-        } else if (oper == "*") {
-            return result = numOne * numTwo;
-        } else if (oper == "-") {
-            return result = numOne - numTwo;
-        } else if (oper == "+") {
-            return result = numOne + numTwo;
-        }
-        return 0.0;
-    }
-
-    public void onOperationPressed(String operation) {
-        if (result != 0.0) {
-            double tempResult = result;
-            doResrart();
-            numOne = tempResult;
-            showNumOne(numOne);
-        }
-        oper = operation;
-        showOperation(operation);
-    }
-
-    public void onNumberPressed(int number, String oper, double result) {
-        if (result != 0.0) {
-            doResrart();
-            numOne = numOne * base + number;
-            showNumOne(numOne);
-        } else if (oper == null) {
-            numOne = numOne * base + number;
-            showNumOne(numOne);
-        } else if (oper != null) {
-            numTwo = numTwo * base + number;
-            showNumTwo(numTwo);
-        }
-    }
 
     public void showOperation(String operation) {
         txtOperation.setText(operation);
