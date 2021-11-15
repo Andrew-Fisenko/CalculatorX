@@ -34,6 +34,15 @@ public class CalcuatorActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putDouble("numOne", presenter.getNumOne());
+        savedInstanceState.putDouble("numTwo", presenter.getNumTwo());
+        savedInstanceState.putString("oper", presenter.getOper());
+        savedInstanceState.putDouble("result", presenter.getResult());
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
@@ -46,10 +55,18 @@ public class CalcuatorActivity extends AppCompatActivity {
         calculatorView = new CalcuatorActivity(txtResult, txtNumberOne, txtNumberTwo, txtOperation) {
         };
 
-
-
-
         presenter = new CalculatorPresenter();
+
+        if (savedInstanceState != null) {
+            presenter.setNumOne(savedInstanceState.getDouble("numOne"));
+            showNumOne(presenter.getNumOne());
+            presenter.setNumTwo(savedInstanceState.getDouble("numTwo"));
+            showNumTwo(presenter.getNumTwo());
+            presenter.setOper(savedInstanceState.getString("oper"));
+            showOperation(presenter.getOper());
+            presenter.setResult(savedInstanceState.getDouble("result"));
+            showResult(presenter.getResult());
+        }
 
         Map<Integer, Integer> numbers = new HashMap<>();
         numbers.put(R.id.but_0, 0);
@@ -66,9 +83,9 @@ public class CalcuatorActivity extends AppCompatActivity {
         View.OnClickListener numbersClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double x = presenter.onNumberPressed(numbers.get(v.getId()),  presenter.getOper(),
+                double x = presenter.onNumberPressed(numbers.get(v.getId()), presenter.getOper(),
                         presenter.getResult(), calculatorView);
-                if ( x == presenter.getNumOne()){
+                if (presenter.getOper() == null) {
                     showNumOne(x);
                 } else {
                     showNumTwo(x);
@@ -122,7 +139,6 @@ public class CalcuatorActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void showOperation(String operation) {
         txtOperation.setText(operation);

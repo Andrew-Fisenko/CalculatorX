@@ -4,13 +4,11 @@ import android.widget.TextView;
 
 public class CalculatorPresenter {
 
-
     private static final int base = 10;
     private Double numOne;
     private Double numTwo;
     private String oper;
     private Double result;
-
 
     public CalculatorPresenter() {
         this.numOne = 0.0;
@@ -33,6 +31,22 @@ public class CalculatorPresenter {
 
     public Double getNumTwo() {
         return numTwo;
+    }
+
+    public void setNumOne(Double numOne) {
+        this.numOne = numOne;
+    }
+
+    public void setNumTwo(Double numTwo) {
+        this.numTwo = numTwo;
+    }
+
+    public void setOper(String oper) {
+        this.oper = oper;
+    }
+
+    public void setResult(Double result) {
+        this.result = result;
     }
 
     public void doResrart(CalcuatorActivity calculatorView) {
@@ -72,7 +86,7 @@ public class CalculatorPresenter {
     }
 
     public void onOperationPressed(String operation, CalcuatorActivity calculatorView) {
-        if (result != 0.0) {
+        if (numTwo != 0.0) {
             double tempResult = result;
             doResrart(calculatorView);
             numOne = tempResult;
@@ -96,6 +110,5 @@ public class CalculatorPresenter {
         }
         return 0.0;
     }
-
 
 }
