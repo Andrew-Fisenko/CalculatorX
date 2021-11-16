@@ -4,4 +4,7 @@
     <dimen name="numbers_text_size">48sp</dimen>
     <dimen name="button_text_size_land">18sp</dimen>
     <dimen name="numbers_text_size_land">28sp</dimen>
+    <dimen name="button_margin">5dp</dimen>
+    <dimen name="text_margin">10dp</dimen>
+    <dimen name="corner_radius">20dp</dimen>
 </resources>

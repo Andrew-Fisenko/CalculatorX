@@ -3,8 +3,11 @@ package com.example.calculatorx;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ public class CalcuatorActivity extends AppCompatActivity {
 
     private CalculatorPresenter presenter;
     private CalcuatorActivity calculatorView;
+
 
     public CalcuatorActivity() {
         this.calculatorView = calculatorView;
@@ -45,7 +49,9 @@ public class CalcuatorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calculator);
+
 
         txtResult = findViewById(R.id.txt_result);
         txtNumberOne = findViewById(R.id.number_one);
@@ -130,6 +136,7 @@ public class CalcuatorActivity extends AppCompatActivity {
                 showResult(presenter.doOperation(presenter.getNumOne(), presenter.getNumTwo(), presenter.getOper()));
             }
         });
+
 
         Button butC = findViewById(R.id.but_c);
         butC.setOnClickListener(new View.OnClickListener() {

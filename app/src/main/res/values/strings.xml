@@ -19,10 +19,15 @@
     <string name="but_sqrt">&#8730;</string>
     <string name="but_per">%</string>
     <string name="but_deg">x&#178;</string>
-    <string name="but_x">...</string>
+    <string name="but_x">D</string>
     <string name="but_c">c</string>
     <string name="but_opt">OPT</string>
     <string name="but_eql">=</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="theme">Choose the Theme</string>
+    <string name="but_light">L</string>
+    <string name="but_dark">D</string>
 
 
 </resources>

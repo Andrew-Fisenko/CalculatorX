@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_back_wall"
+
     android:orientation="vertical"
     tools:context=".CalcuatorActivity">
 
@@ -12,7 +12,7 @@
         android:id="@+id/number_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/text_margin"
         android:gravity="right"
         android:textSize="@dimen/numbers_text_size" />
 
@@ -25,7 +25,7 @@
             android:id="@+id/operation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/text_margin"
             android:layout_weight="6"
             android:gravity="center"
             android:textSize="@dimen/numbers_text_size" />
@@ -34,7 +34,7 @@
             android:id="@+id/number_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/text_margin"
             android:layout_weight="1"
             android:gravity="right"
             android:textSize="@dimen/numbers_text_size" />
@@ -44,7 +44,7 @@
         android:id="@+id/txt_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/text_margin"
         android:gravity="right"
         android:textSize="@dimen/numbers_text_size" />
 
@@ -60,32 +60,32 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_c"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/but_..."
+            android:id="@+id/but_dark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
-            android:text="@string/but_x"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/but_dark"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/but_opt"
+            android:id="@+id/but_light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
-            android:text="@string/but_opt"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/but_light"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_div"
@@ -93,10 +93,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_div"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_7"
@@ -104,10 +104,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_7"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_8"
@@ -115,10 +115,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_8"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_9"
@@ -126,100 +126,100 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_9"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_mult"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_mult"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_4"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_5"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_6"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_sub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_sub"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_1"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_2"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_3"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_sum"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_sum"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_0"
@@ -227,20 +227,20 @@
             android:layout_height="wrap_content"
             android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_0"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_dot"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_point"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/but_eql"
@@ -248,10 +248,10 @@
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_gravity="fill_horizontal"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/button_margin"
             android:text="@string/but_eql"
             android:textSize="@dimen/button_text_size"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="@dimen/corner_radius" />
 
     </GridLayout>
 

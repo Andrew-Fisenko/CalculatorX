@@ -86,7 +86,7 @@ public class CalculatorPresenter {
     }
 
     public void onOperationPressed(String operation, CalcuatorActivity calculatorView) {
-        if (numTwo != 0.0) {
+        if (result != 0.0) {
             double tempResult = result;
             doResrart(calculatorView);
             numOne = tempResult;
