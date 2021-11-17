@@ -90,10 +90,6 @@ public class CalcuatorActivity extends AppCompatActivity {
 
         presenter = new CalculatorPresenter();
 
-
-//        setTheme(R.style.Dark_Theme);
-
-
             if (savedInstanceState != null) {
             presenter.setNumOne(savedInstanceState.getDouble("numOne"));
             showNumOne(presenter.getNumOne());
@@ -169,6 +165,13 @@ public class CalcuatorActivity extends AppCompatActivity {
             }
         });
 
+        Button butDot = findViewById(R.id.but_dot);
+        butDot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onDotPressed(calculatorView);
+            }
+        });
 
         Button butC = findViewById(R.id.but_c);
         butC.setOnClickListener(new View.OnClickListener() {
@@ -226,8 +229,6 @@ public class CalcuatorActivity extends AppCompatActivity {
 //            container.addView(itemView);
 //        }
     }
-
-
 
     public void showOperation(String operation) {
         txtOperation.setText(operation);

@@ -2,6 +2,8 @@ package com.example.calculatorx;
 
 import android.widget.TextView;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,16 @@ public class CalculatorPresenter {
     private Double numTwo;
     private String oper;
     private Double result;
+    private boolean onDotPressed;
+    private int divider;
 
     public CalculatorPresenter() {
         this.numOne = 0.0;
         this.numTwo = 0.0;
         this.oper = null;
         this.result = 0.0;
+        this.onDotPressed = false;
+        this.divider = 10;
     }
 
     public Double getResult() {
@@ -56,6 +62,8 @@ public class CalculatorPresenter {
         numOne = 0.0;
         numTwo = 0.0;
         result = 0.0;
+        divider = 10;
+        onDotPressed = false;
         calculatorView.showNumOne(numOne);
         calculatorView.showNumTwo(numTwo);
         calculatorView.showResult(result);
@@ -64,26 +72,34 @@ public class CalculatorPresenter {
     }
 
     public double doOperation(Double numOne, Double numTwo, String oper) {
-        if (numOne == 0 || numTwo == 0 || oper == null) {
+        if (numTwo == 0 || oper == null) {
             return 0.0;
         } else if (result != 0.0) {
             if (oper == "/") {
-                return result = result / numTwo;
+                result = result / numTwo;
+                toDecimalFormat(result);
             } else if (oper == "*") {
-                return result = result * numTwo;
+                result = result * numTwo;
+                return toDecimalFormat(result);
             } else if (oper == "-") {
-                return result = result - numTwo;
+                result = result - numTwo;
+                return toDecimalFormat(result);
             } else if (oper == "+") {
-                return result = result + numTwo;
+                result = result + numTwo;
+                return toDecimalFormat(result);
             }
         } else if (oper == "/") {
-            return result = numOne / numTwo;
+            result = numOne / numTwo;
+            return toDecimalFormat(result);
         } else if (oper == "*") {
-            return result = numOne * numTwo;
+            result = numOne * numTwo;
+            return toDecimalFormat(result);
         } else if (oper == "-") {
-            return result = numOne - numTwo;
+            result = numOne - numTwo;
+            return toDecimalFormat(result);
         } else if (oper == "+") {
-            return result = numOne + numTwo;
+            result = numOne + numTwo;
+            return toDecimalFormat(result);
         }
         return 0.0;
     }
@@ -92,10 +108,13 @@ public class CalculatorPresenter {
         if (result != 0.0) {
             double tempResult = result;
             doResrart(calculatorView);
-            numOne = tempResult;
+
+            numOne = toDecimalFormat(tempResult);
             calculatorView.showNumOne(numOne);
         }
         oper = operation;
+        onDotPressed = false;
+        divider = 10;
         calculatorView.showOperation(operation);
     }
 
@@ -104,15 +123,40 @@ public class CalculatorPresenter {
             doResrart(calculatorView);
             numOne = numOne * base + number;
             return numOne;
+
         } else if (oper == null) {
-            numOne = numOne * base + number;
+            if (onDotPressed == false) {
+                numOne = numOne * base + number;
+                return numOne;
+            } else {
+                numOne = numOne + number / (double) divider;
+                divider *= base;
+                numOne = toDecimalFormat(numOne);
+            }
             return numOne;
+
         } else if (oper != null) {
-            numTwo = numTwo * base + number;
+            if (onDotPressed == false) {
+                numTwo = numTwo * base + number;
+            } else {
+                numTwo = numTwo + number / (double) divider;
+                divider *= base;
+                numTwo = toDecimalFormat(numTwo);
+            }
             return numTwo;
         }
         return 0.0;
     }
 
+    public void onDotPressed(CalcuatorActivity calculatorView) {
+        onDotPressed = true;
+    }
 
+    public double toDecimalFormat(double result) {
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        String tempRes = df.format(result);
+        result = Double.parseDouble(tempRes);
+        return result;
+    }
 }
