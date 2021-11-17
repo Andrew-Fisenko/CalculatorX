@@ -178,32 +178,53 @@ public class CalcuatorActivity extends AppCompatActivity {
             }
         });
 
-        container = findViewById(R.id.theme_container);
+//        container = findViewById(R.id.theme_container);
 
 //        requestTheme();
 
         if (container != null) {
 
         }
+
+        Button butDark = findViewById(R.id.but_dark);
+        Button butLight = findViewById(R.id.but_light);
         for (Theme theme : Theme.values()) {
-            View itemView = getLayoutInflater().inflate(R.layout.item_theme, container, false);
-            ImageView img = itemView.findViewById(R.id.img_theme_1);
-            TextView txt = itemView.findViewById(R.id.text_theme);
-
-            img.setImageResource(theme.getImg());
-            txt.setText(theme.getTitle());
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            butDark.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    storage.setTheme(theme);
-//                    selectedTheme = theme;
+                    storage.setTheme(Theme.THEME_ONE);
                     recreate();
                 }
             });
 
-            container.addView(itemView);
+            butLight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    storage.setTheme(Theme.THEME_TWO);
+                    recreate();
+                }
+            });
         }
+
+//        for (Theme theme : Theme.values()) {
+//            View itemView = getLayoutInflater().inflate(R.layout.item_theme, container, false);
+//            ImageView img = itemView.findViewById(R.id.img_theme_1);
+//            TextView txt = itemView.findViewById(R.id.text_theme);
+//
+//            img.setImageResource(theme.getImg());
+//            txt.setText(theme.getTitle());
+//
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    storage.setTheme(theme);
+//
+//                    recreate();
+//                }
+//            });
+//
+//            container.addView(itemView);
+//        }
     }
 
 
