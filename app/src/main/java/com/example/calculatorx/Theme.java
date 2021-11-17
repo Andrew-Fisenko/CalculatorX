@@ -19,16 +19,12 @@ public enum  Theme {
 
     private final String key;
 
-
-
-
     private Theme(int title, int img, int theme, String key) {
         this.title = title;
         this.img = img;
         this.theme = theme;
         this.key = key;
     }
-
 
     //
 //    public static final Creator<Theme> CREATOR = new Creator<Theme>() {

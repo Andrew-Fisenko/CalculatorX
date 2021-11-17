@@ -25,13 +25,13 @@ import java.util.zip.Inflater;
 
 public class CalcuatorActivity extends AppCompatActivity {
 
-    public TextView txtResult;
-    public TextView txtNumberOne;
-    public TextView txtNumberTwo;
-    public TextView txtOperation;
+    private TextView txtResult;
+    private TextView txtNumberOne;
+    private TextView txtNumberTwo;
+    private TextView txtOperation;
 
     private CalculatorPresenter presenter;
-    private CalcuatorActivity calculatorView;
+   
 
     private LinearLayout container;
 
@@ -41,16 +41,7 @@ public class CalcuatorActivity extends AppCompatActivity {
     private ThemeStorage storage;
 
 
-    public CalcuatorActivity() {
-        this.calculatorView = calculatorView;
-    }
-
-    public CalcuatorActivity(TextView txtResult, TextView txtNumberOne, TextView txtNumberTwo, TextView txtOperation) {
-        this.txtResult = txtResult;
-        this.txtNumberOne = txtNumberOne;
-        this.txtNumberTwo = txtNumberTwo;
-        this.txtOperation = txtOperation;
-    }
+ 
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
@@ -85,8 +76,7 @@ public class CalcuatorActivity extends AppCompatActivity {
         txtNumberTwo = findViewById(R.id.number_two);
         txtOperation = findViewById(R.id.operation);
 
-        calculatorView = new CalcuatorActivity(txtResult, txtNumberOne, txtNumberTwo, txtOperation) {
-        };
+        CalcuatorActivity calculatorView = this;
 
         presenter = new CalculatorPresenter();
 
