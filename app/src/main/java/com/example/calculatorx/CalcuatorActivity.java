@@ -8,12 +8,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.zip.Inflater;
 
 public class CalcuatorActivity extends AppCompatActivity {
 
@@ -24,6 +30,11 @@ public class CalcuatorActivity extends AppCompatActivity {
 
     private CalculatorPresenter presenter;
     private CalcuatorActivity calculatorView;
+
+    private LinearLayout container;
+
+    private static final String ARG_THEME = "ARG_THEME";
+    private Theme selectedTheme;
 
 
     public CalcuatorActivity() {
@@ -44,14 +55,22 @@ public class CalcuatorActivity extends AppCompatActivity {
         savedInstanceState.putDouble("numTwo", presenter.getNumTwo());
         savedInstanceState.putString("oper", presenter.getOper());
         savedInstanceState.putDouble("result", presenter.getResult());
+        if (selectedTheme != null) {
+            savedInstanceState.putParcelable(ARG_THEME, selectedTheme);
+        }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_calculator);
+        if (savedInstanceState != null && savedInstanceState.containsKey(ARG_THEME)) {
+            Theme selectedTheme = savedInstanceState.getParcelable(ARG_THEME);
+            setTheme(selectedTheme.getTheme());
+        }
 
+        setContentView(R.layout.activity_calculator);
 
         txtResult = findViewById(R.id.txt_result);
         txtNumberOne = findViewById(R.id.number_one);
@@ -63,7 +82,11 @@ public class CalcuatorActivity extends AppCompatActivity {
 
         presenter = new CalculatorPresenter();
 
-        if (savedInstanceState != null) {
+
+//        setTheme(R.style.Dark_Theme);
+
+
+            if (savedInstanceState != null) {
             presenter.setNumOne(savedInstanceState.getDouble("numOne"));
             showNumOne(presenter.getNumOne());
             presenter.setNumTwo(savedInstanceState.getDouble("numTwo"));
@@ -73,6 +96,14 @@ public class CalcuatorActivity extends AppCompatActivity {
             presenter.setResult(savedInstanceState.getDouble("result"));
             showResult(presenter.getResult());
         }
+
+
+
+
+
+
+
+
 
         Map<Integer, Integer> numbers = new HashMap<>();
         numbers.put(R.id.but_0, 0);
@@ -145,7 +176,18 @@ public class CalcuatorActivity extends AppCompatActivity {
                 presenter.doResrart(calculatorView);
             }
         });
+
+        container = findViewById(R.id.theme_container);
+
+        requestTheme();
+
+        if (container != null) {
+
+        }
+
     }
+
+
 
     public void showOperation(String operation) {
         txtOperation.setText(operation);
@@ -161,6 +203,38 @@ public class CalcuatorActivity extends AppCompatActivity {
 
     public void showResult(Double result) {
         txtResult.setText(result.toString());
+    }
+
+    public void requestTheme() {
+        List<Theme> themes = new ArrayList<>();
+        themes.add(new Theme(R.string.dark_theme, R.drawable.ic_circle, R.style.DarkTheme));
+        themes.add(new Theme(R.string.light_theme, R.drawable.ic_circle, R.style.LightTheme));
+        showThemes(themes);
+    }
+
+
+    public void showThemes(List<Theme> themes) {
+        if (container == null) {
+            return;
+        }
+        for (Theme theme : themes) {
+            View itemView = getLayoutInflater().inflate(R.layout.item_theme, container, false);
+            ImageView img = itemView.findViewById(R.id.img_theme_1);
+            TextView txt = itemView.findViewById(R.id.text_theme);
+
+            img.setImageResource(theme.getImg());
+            txt.setText(theme.getTitle());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedTheme = theme;
+                    recreate();
+                }
+            });
+
+            container.addView(itemView);
+        }
     }
 
 

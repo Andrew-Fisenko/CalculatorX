@@ -2,6 +2,9 @@ package com.example.calculatorx;
 
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CalculatorPresenter {
 
     private static final int base = 10;
@@ -110,5 +113,6 @@ public class CalculatorPresenter {
         }
         return 0.0;
     }
+
 
 }
