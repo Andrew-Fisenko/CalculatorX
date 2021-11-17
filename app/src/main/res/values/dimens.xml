@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_text_size">24sp</dimen>
+    <dimen name="numbers_text_size">48sp</dimen>
+    <dimen name="button_text_size_land">24sp</dimen>
+    <dimen name="numbers_text_size_land">28sp</dimen>
+    <dimen name="button_margin">5dp</dimen>
+    <dimen name="text_margin">10dp</dimen>
+    <dimen name="button_margin_land">2dp</dimen>
+    <dimen name="text_margin_land">5dp</dimen>
+    <dimen name="corner_radius">20dp</dimen>
+</resources>
