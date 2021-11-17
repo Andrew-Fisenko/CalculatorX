@@ -1,13 +1,15 @@
 package com.example.calculatorx;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 
-public class Theme implements Parcelable {
+public enum  Theme {
+
+    THEME_ONE(R.string.dark_theme, R.drawable.ic_circle, R.style.DarkTheme, "dark"),
+    THEME_TWO(R.string.light_theme, R.drawable.ic_circle, R.style.LightTheme, "light");
+
+
     @StringRes
     private int title;
     @DrawableRes
@@ -15,31 +17,33 @@ public class Theme implements Parcelable {
     @StyleRes
     private int theme;
 
+    private final String key;
 
-    public Theme(int title, int img, int theme) {
+
+
+
+    private Theme(int title, int img, int theme, String key) {
         this.title = title;
         this.img = img;
         this.theme = theme;
+        this.key = key;
     }
 
-    protected Theme(Parcel in) {
-        title = in.readInt();
-        img = in.readInt();
-        theme = in.readInt();
-    }
 
-    public static final Creator<Theme> CREATOR = new Creator<Theme>() {
-        @Override
-        public Theme createFromParcel(Parcel in) {
-            return new Theme(in);
-        }
-
-        @Override
-        public Theme[] newArray(int size) {
-            return new Theme[size];
-        }
-    };
-
+    //
+//    public static final Creator<Theme> CREATOR = new Creator<Theme>() {
+//        @Override
+//        public Theme createFromParcel(Parcel in) {
+//            return new Theme(in);
+//        }
+//
+//        @Override
+//        public Theme[] newArray(int size) {
+//            return new Theme[size];
+//        }
+//    };
+//
+//
     public int getTitle() {
         return title;
     }
@@ -52,15 +56,21 @@ public class Theme implements Parcelable {
         return theme;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getKey() {
+        return key;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(title);
-        dest.writeInt(img);
-        dest.writeInt(theme);
-    }
+    //
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeInt(title);
+//        dest.writeInt(img);
+//        dest.writeInt(theme);
+//    }
+//    }
 }

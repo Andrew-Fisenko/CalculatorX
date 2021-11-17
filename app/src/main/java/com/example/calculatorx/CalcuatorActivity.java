@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.calculatorx.storage.ThemeStorage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +38,8 @@ public class CalcuatorActivity extends AppCompatActivity {
     private static final String ARG_THEME = "ARG_THEME";
     private Theme selectedTheme;
 
+    private ThemeStorage storage;
+
 
     public CalcuatorActivity() {
         this.calculatorView = calculatorView;
@@ -56,7 +60,7 @@ public class CalcuatorActivity extends AppCompatActivity {
         savedInstanceState.putString("oper", presenter.getOper());
         savedInstanceState.putDouble("result", presenter.getResult());
         if (selectedTheme != null) {
-            savedInstanceState.putParcelable(ARG_THEME, selectedTheme);
+            savedInstanceState.putSerializable(ARG_THEME, selectedTheme);
         }
     }
 
@@ -65,10 +69,14 @@ public class CalcuatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(ARG_THEME)) {
-            Theme selectedTheme = savedInstanceState.getParcelable(ARG_THEME);
-            setTheme(selectedTheme.getTheme());
-        }
+        storage = new ThemeStorage(this);
+
+        setTheme(storage.getTheme().getTheme());
+
+//        if (savedInstanceState != null && savedInstanceState.containsKey(ARG_THEME)) {
+//            Theme selectedTheme = (Theme) savedInstanceState.getSerializable(ARG_THEME);
+//            setTheme(selectedTheme.getTheme());
+//        }
 
         setContentView(R.layout.activity_calculator);
 
@@ -96,13 +104,6 @@ public class CalcuatorActivity extends AppCompatActivity {
             presenter.setResult(savedInstanceState.getDouble("result"));
             showResult(presenter.getResult());
         }
-
-
-
-
-
-
-
 
 
         Map<Integer, Integer> numbers = new HashMap<>();
@@ -179,12 +180,30 @@ public class CalcuatorActivity extends AppCompatActivity {
 
         container = findViewById(R.id.theme_container);
 
-        requestTheme();
+//        requestTheme();
 
         if (container != null) {
 
         }
+        for (Theme theme : Theme.values()) {
+            View itemView = getLayoutInflater().inflate(R.layout.item_theme, container, false);
+            ImageView img = itemView.findViewById(R.id.img_theme_1);
+            TextView txt = itemView.findViewById(R.id.text_theme);
 
+            img.setImageResource(theme.getImg());
+            txt.setText(theme.getTitle());
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    storage.setTheme(theme);
+//                    selectedTheme = theme;
+                    recreate();
+                }
+            });
+
+            container.addView(itemView);
+        }
     }
 
 
@@ -205,37 +224,21 @@ public class CalcuatorActivity extends AppCompatActivity {
         txtResult.setText(result.toString());
     }
 
-    public void requestTheme() {
-        List<Theme> themes = new ArrayList<>();
-        themes.add(new Theme(R.string.dark_theme, R.drawable.ic_circle, R.style.DarkTheme));
-        themes.add(new Theme(R.string.light_theme, R.drawable.ic_circle, R.style.LightTheme));
-        showThemes(themes);
+//    public void requestTheme() {
+//        List<Theme> themes = new ArrayList<>();
+//        themes.add(new Theme(R.string.dark_theme, R.drawable.ic_circle, R.style.DarkTheme));
+//        themes.add(new Theme(R.string.light_theme, R.drawable.ic_circle, R.style.LightTheme));
+//        showThemes(themes);
+//    }
+
+
+//    public void showThemes(List<Theme> themes) {
+//        if (container == null) {
+//            return;
+//        }
+//
+//
+
     }
 
 
-    public void showThemes(List<Theme> themes) {
-        if (container == null) {
-            return;
-        }
-        for (Theme theme : themes) {
-            View itemView = getLayoutInflater().inflate(R.layout.item_theme, container, false);
-            ImageView img = itemView.findViewById(R.id.img_theme_1);
-            TextView txt = itemView.findViewById(R.id.text_theme);
-
-            img.setImageResource(theme.getImg());
-            txt.setText(theme.getTitle());
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectedTheme = theme;
-                    recreate();
-                }
-            });
-
-            container.addView(itemView);
-        }
-    }
-
-
-}
